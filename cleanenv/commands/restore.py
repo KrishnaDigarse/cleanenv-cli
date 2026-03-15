@@ -2,8 +2,7 @@ import typer
 from rich.console import Console
 
 from cleanenv.services.restore import restore_backup
-from cleanenv.services.backup import METADATA_FILE
-import json
+from cleanenv.services.backup import load_metadata
 
 console = Console()
 
@@ -11,8 +10,10 @@ console = Console()
 def restore(index: int = typer.Argument(None)):
     """Restore deleted environments"""
 
-    with open(METADATA_FILE) as f:
-        metadata = json.load(f)
+    try:
+        metadata = load_metadata()
+    except FileNotFoundError:
+        metadata = {}
 
     backups = list(metadata.keys())
 
@@ -34,8 +35,14 @@ def restore(index: int = typer.Argument(None)):
         console.print("\nRun: cleanenv restore <number>\n")
         return
 
+    if index < 1 or index > len(backups):
+        console.print("[red]Invalid backup index. Please provide a valid number from the list.[/red]")
+        return
+
     backup_id = backups[index - 1]
 
-    path = restore_backup(backup_id)
-
-    console.print(f"[green]Restored to:[/green] {path}")
+    try:
+        path = restore_backup(backup_id)
+        console.print(f"[green]Restored to:[/green] {path}")
+    except Exception as e:
+        console.print(f"[red]Failed to restore backup:[/red] {e}")

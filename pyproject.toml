@@ -3,13 +3,32 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cleanenv"
+name = "cleanenv-cli"
 version = "0.1.0"
-description = "CLI tool to clean node_modules and virtual environments"
+description = "CLI tool to clean node_modules and virtual environments safely"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Krishna Digarse" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+]
 dependencies = [
     "typer",
     "rich"
 ]
+
+[project.urls]
+Homepage = "https://github.com/KrishnaDigarse/cleanenv-cli"
+Repository = "https://github.com/KrishnaDigarse/cleanenv-cli"
+
+[tool.setuptools]
+packages = ["cleanenv"]
 
 [project.scripts]
 cleanenv = "cleanenv.cli:app"

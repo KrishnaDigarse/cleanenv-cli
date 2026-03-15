@@ -1,9 +1,26 @@
+# Python Core
 __pycache__/
-*.pyc
-venv/
-.env
+*.py[cod]
+*$py.class
 *.egg-info/
+.pytest_cache/
+
+# Distributions and Builds
 build/
 dist/
+*.egg
+
+# OS/System
 .DS_Store
 Thumbs.db
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Node
+node_modules/
+
+# Local Testing
+test_env/

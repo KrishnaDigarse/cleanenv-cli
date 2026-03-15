@@ -1,13 +1,7 @@
 import shutil
 from pathlib import Path
-import json
 
-from cleanenv.services.backup import BACKUP_FOLDER, METADATA_FILE
-
-
-def load_metadata():
-    with open(METADATA_FILE) as f:
-        return json.load(f)
+from cleanenv.services.backup import BACKUP_FOLDER, load_metadata, save_metadata
 
 
 def restore_backup(backup_id):
@@ -22,6 +16,9 @@ def restore_backup(backup_id):
     backup_dir = BACKUP_FOLDER / backup_id
 
     # find the folder inside backup directory
+    if not backup_dir.exists():
+        raise ValueError("Backup directory missing")
+
     items = list(backup_dir.iterdir())
 
     if not items:
@@ -30,5 +27,9 @@ def restore_backup(backup_id):
     folder = items[0]
 
     shutil.move(str(folder), str(original_path))
+    shutil.rmtree(str(backup_dir), ignore_errors=True)
+
+    metadata.pop(backup_id, None)
+    save_metadata(metadata)
 
     return original_path

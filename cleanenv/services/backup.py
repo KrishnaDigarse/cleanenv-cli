@@ -29,6 +29,8 @@ def save_metadata(data):
         json.dump(data, f, indent=2)
 
 
+import uuid
+
 def backup_folder(path):
     """
     Move folder to backup location and record metadata
@@ -36,10 +38,11 @@ def backup_folder(path):
 
     initialize_backup_system()
 
-    backup_id = f"backup_{int(time.time())}"
+    unique_suffix = uuid.uuid4().hex[:6]
+    backup_id = f"backup_{int(time.time())}_{unique_suffix}"
 
     backup_dir = BACKUP_FOLDER / backup_id
-    backup_dir.mkdir()
+    backup_dir.mkdir(parents=True, exist_ok=True)
 
     folder_name = os.path.basename(path)
     destination = backup_dir / folder_name

@@ -24,8 +24,7 @@ def clean(path: str):
         if "venv" in r:
             generate_requirements(r)
 
-        backup_path = backup_folder(r)
+        backup_id, backup_path = backup_folder(r)
 
         console.print(f"[yellow]Moved:[/yellow] {r}")
-        console.print(f"[green]Backup:[/green] {backup_path}\n")
-        console.print(f"[green]Backup Path:[/green] {backup_path}\n")
+        console.print(f"[green]Backup Location:[/green] {backup_path}\n")

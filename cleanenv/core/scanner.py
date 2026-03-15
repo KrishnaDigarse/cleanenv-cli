@@ -8,9 +8,16 @@ SKIP_DIRS = {
     "Program Files",
     "Program Files (x86)",
     "$Recycle.Bin",
-    "System Volume Information"
+    "System Volume Information",
+    ".Trash",
+    ".Trashes"
 }
 
+def is_venv(path):
+    """Check if the directory is a valid Python virtual environment."""
+    return os.path.isfile(os.path.join(path, "pyvenv.cfg")) or \
+           os.path.isdir(os.path.join(path, "Scripts")) or \
+           os.path.isdir(os.path.join(path, "bin"))
 
 def scan_directory(root):
     results = []
@@ -32,6 +39,11 @@ def scan_directory(root):
 
                     # Detect dependency folders
                     if entry.name in TARGET_DIRS:
+                        if entry.name in {"venv", ".venv"} and not is_venv(entry.path):
+                            # Not a real venv, treat as regular directory
+                            stack.append(entry.path)
+                            continue
+
                         results.append(entry.path)
 
                         # Stop recursion inside dependency folders
