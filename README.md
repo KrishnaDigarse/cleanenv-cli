@@ -13,14 +13,18 @@ Instead of permanently deleting folders right away, CleanEnv moves them to a sec
 
 ## Installation
 
-CleanEnv can be installed globally using `pip` or `pipx`.
+CleanEnv can be installed globally directly from the source code using `pip` or `pipx`.
 
 ```bash
-# Install directly from PyPI (Recommended)
-pip install cleanenv-cli
+# Clone the repository
+git clone https://github.com/KrishnaDigarse/cleanenv-cli.git
+cd cleanenv-cli
+
+# Install globally using pip
+pip install .
 
 # Or install without polluting your global packages using pipx
-pipx install cleanenv-cli
+pipx install .
 ```
 
 To install it for local development (editable mode):
