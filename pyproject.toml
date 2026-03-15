@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cleanenv"
+version = "0.1.0"
+description = "CLI tool to clean node_modules and virtual environments"
+dependencies = [
+    "typer",
+    "rich"
+]
+
+[project.scripts]
+cleanenv = "cleanenv.cli:app"
