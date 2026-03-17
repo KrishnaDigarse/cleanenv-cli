@@ -24,3 +24,7 @@ node_modules/
 
 # Local Testing
 test_env/
+
+# Test Output
+test_out.txt
+test_cli_out.txt

@@ -95,7 +95,7 @@ def test_scan_directory_skips_own_dir(monkeypatch):
         import cleanenv.core.scanner as scanner
         
         original_own_dir = scanner.OWN_DIR
-        scanner.OWN_DIR = temp_dir
+        scanner.OWN_DIR = os.path.normcase(os.path.abspath(temp_dir))
         
         # Create something that would normally be found
         os.makedirs(os.path.join(temp_dir, "node_modules"))
