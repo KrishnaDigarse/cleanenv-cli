@@ -23,6 +23,11 @@ dependencies = [
     "rich"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
 [project.urls]
 Homepage = "https://github.com/KrishnaDigarse/cleanenv-cli"
 Repository = "https://github.com/KrishnaDigarse/cleanenv-cli"

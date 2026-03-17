@@ -13,6 +13,9 @@ SKIP_DIRS = {
     ".Trashes"
 }
 
+# Reference to the tool's own directory (e.g., to prevent deleting its own venv)
+OWN_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
 def is_venv(path):
     """Check if the directory is a valid Python virtual environment."""
     return os.path.isfile(os.path.join(path, "pyvenv.cfg")) or \
@@ -25,6 +28,10 @@ def scan_directory(root):
 
     while stack:
         current = stack.pop()
+
+        # Skip the tool's own directory entirely
+        if os.path.normcase(os.path.abspath(current)) == os.path.normcase(OWN_DIR):
+            continue
 
         try:
             with os.scandir(current) as entries:

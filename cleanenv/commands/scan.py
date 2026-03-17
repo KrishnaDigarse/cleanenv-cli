@@ -22,7 +22,7 @@ def scan(path: str):
     table = Table(title="CleanEnv Results")
 
     table.add_column("Path", style="cyan")
-    table.add_column("Size", style="magenta")
+    table.add_column("Size", style="yellow")
 
     total = 0
 
