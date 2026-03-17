@@ -60,3 +60,19 @@ Restore a specific backup by its index number (e.g., restore the 2nd item in the
 ```bash
 cleanenv restore 2
 ```
+
+## Testing
+
+CleanEnv has a comprehensive test suite covering the core modules (`size`, `projects`, `scanner`) and services (`requirements`, `restore`). It also includes CLI tests to verify terminal output and interactions.
+
+To run the tests, first install the developer dependencies:
+
+```bash
+pip install -e .[dev]
+```
+
+Run the `pytest` suite:
+
+```bash
+pytest tests/
+```
